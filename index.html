@@ -1,0 +1,458 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex,nofollow">
+<title>流れて消えるはずの対話が、知恵に変わる。｜AI×対話型組織開発 やさしい図解｜Oxymoron</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@300;400;500;700&family=Shippori+Mincho:wght@500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --ink:#16161d; --ink-soft:#2a2a33; --cream:#f7f4ee; --cream-2:#efe9df;
+    --paper:#fdfcfa; --accent:#b5613f; --accent-deep:#8f4226; --accent-lite:#d98a66;
+    --line:rgba(0,0,0,.10); --muted:#6b6b73;
+    --serif:'Shippori Mincho',"Yu Mincho","游明朝","Hiragino Mincho ProN",serif;
+    --sans:'Noto Sans JP',"Hiragino Kaku Gothic ProN","Yu Gothic","Segoe UI",sans-serif;
+    --maxw:880px;
+  }
+  *{margin:0;padding:0;box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{font-family:var(--sans); color:var(--ink); background:var(--paper);
+    line-height:1.95; letter-spacing:.02em; -webkit-font-smoothing:antialiased; overflow-x:hidden; font-size:17px;}
+  #progress{position:fixed; top:0; left:0; height:3px; width:0;
+    background:linear-gradient(90deg,var(--accent),var(--accent-deep)); z-index:1000; transition:width .1s linear;}
+
+  section{padding:clamp(60px,9vh,110px) 6vw; position:relative;}
+  .wrap{max-width:var(--maxw); margin:0 auto;}
+  h1,h2,h3,h4,.lead,blockquote{font-family:var(--serif); font-weight:600; letter-spacing:.03em;}
+
+  .eyebrow{font-size:.72rem; letter-spacing:.32em; text-transform:uppercase; color:var(--accent);
+    font-family:var(--sans); font-weight:500; margin-bottom:18px; display:flex; align-items:center; gap:13px;}
+  .eyebrow::before{content:""; width:30px; height:1px; background:var(--accent);}
+  .step-no{color:var(--accent); font-family:var(--sans); font-weight:500;}
+
+  h2{font-size:clamp(1.5rem,3.6vw,2.3rem); line-height:1.55; margin-bottom:22px;}
+  h3{font-size:clamp(1.05rem,2.1vw,1.28rem); font-weight:500; margin:30px 0 9px;}
+  p{font-size:clamp(.96rem,1.6vw,1.05rem); color:var(--ink-soft); font-family:var(--sans);}
+  p+p{margin-top:16px;}
+  .lead{font-size:clamp(1.02rem,2vw,1.2rem); line-height:2.05; color:var(--ink); font-family:var(--sans); font-weight:400;}
+  .muted{color:var(--muted);}
+  strong{font-weight:700; color:var(--accent-deep);}
+  .ink-strong{color:var(--ink); font-weight:700;}
+
+  /* backgrounds */
+  .cream{background:var(--cream);} .cream2{background:var(--cream-2);} .center{text-align:center;}
+  .dark{background:radial-gradient(120% 120% at 75% 0%,#20202b 0%,var(--ink) 58%,#0e0e14 100%); color:var(--cream);}
+  .dark h2,.dark h3,.dark h4{color:#fbf8f2;} .dark p{color:rgba(247,244,238,.8);}
+  .dark .lead{color:#f3eee5;} .dark strong{color:var(--accent-lite);}
+  .dark .ink-strong{color:#fff;}
+  .dark .eyebrow{color:var(--accent-lite);} .dark .eyebrow::before{background:var(--accent-lite);}
+
+  /* HERO */
+  #hero{min-height:94vh; display:flex; flex-direction:column; justify-content:center; padding:6vw;}
+  #hero .inner{max-width:1000px; margin:0 auto; width:100%;}
+  #hero .kicker{font-size:.74rem; letter-spacing:.3em; color:var(--accent-lite); margin-bottom:26px; font-family:var(--sans);
+    display:flex; align-items:center; gap:13px;}
+  #hero .kicker::before{content:""; width:30px; height:1px; background:var(--accent-lite);}
+  #hero h1{font-size:clamp(2rem,5.8vw,3.7rem); line-height:1.5; color:#fbf8f2;}
+  #hero h1 .em{color:var(--accent-lite);}
+  #hero .sub{margin-top:30px; font-size:clamp(.96rem,1.8vw,1.16rem); color:rgba(247,244,238,.8);
+    max-width:680px; line-height:2.05; font-family:var(--sans);}
+  .scroll-cue{margin-top:46px; font-size:.74rem; letter-spacing:.24em; color:rgba(247,244,238,.55); font-family:var(--sans);}
+  .scroll-cue span{display:inline-block; animation:bob 2.2s ease-in-out infinite;}
+  @keyframes bob{0%,100%{transform:translateY(0)}50%{transform:translateY(6px)}}
+
+  /* pull quote */
+  blockquote,.pull{font-family:var(--serif); font-size:clamp(1.12rem,2.4vw,1.5rem); line-height:1.82;
+    border-left:3px solid var(--accent); padding:8px 0 8px 26px; margin:34px 0; color:var(--ink); letter-spacing:.04em;}
+  .dark blockquote,.dark .pull{color:#fbf8f2;}
+  .pull .hl{color:var(--accent);} .dark .pull .hl{color:var(--accent-lite);}
+
+  /* cards */
+  .cards{display:grid; gap:18px; margin-top:34px;}
+  .three{grid-template-columns:repeat(3,1fr);} .two{grid-template-columns:repeat(2,1fr);}
+  @media(max-width:760px){.three,.two{grid-template-columns:1fr;}}
+  .card{background:var(--paper); border:1px solid var(--line); border-radius:13px; padding:26px 24px;
+    transition:transform .5s, box-shadow .5s;}
+  .dark .card{background:rgba(255,255,255,.04); border-color:rgba(255,255,255,.1);}
+  .card:hover{transform:translateY(-5px); box-shadow:0 16px 34px rgba(0,0,0,.1);}
+  .card .n{font-family:var(--serif); color:var(--accent); font-size:1.5rem; font-weight:600; display:block; margin-bottom:8px;}
+  .dark .card .n{color:var(--accent-lite);}
+  .card h4{font-size:1.05rem; margin-bottom:8px;}
+  .card p{font-size:.93rem; line-height:1.82;}
+
+  /* two-up contrast */
+  .twoup{display:grid; grid-template-columns:1fr 1fr; gap:16px; margin:28px 0;}
+  @media(max-width:620px){.twoup{grid-template-columns:1fr;}}
+  .box{border-radius:13px; padding:24px 24px; border:1px solid var(--line);}
+  .box.b-old{background:var(--cream-2);} .box.b-new{background:#fbeee7; border-color:var(--accent-lite);}
+  .dark .box.b-old{background:rgba(255,255,255,.05); border-color:rgba(255,255,255,.12);}
+  .dark .box.b-new{background:rgba(181,97,63,.18); border-color:var(--accent);}
+  .box .tag{font-size:.72rem; letter-spacing:.2em; margin-bottom:9px; font-family:var(--sans);}
+  .b-old .tag{color:var(--muted);} .b-new .tag{color:var(--accent-deep);}
+  .dark .b-new .tag{color:var(--accent-lite);}
+  .box h4{margin-bottom:10px; font-size:1.06rem;}
+  .box p{font-size:.94rem; color:var(--ink-soft); margin:0;}
+  .dark .box p{color:rgba(247,244,238,.8);}
+
+  /* example panel */
+  .ex{background:var(--paper); border:1px dashed var(--accent-lite); border-radius:13px; padding:26px; margin:28px 0;}
+  .ex .label{font-size:.74rem; letter-spacing:.2em; color:var(--accent); margin-bottom:11px; font-family:var(--sans);}
+
+  /* network figure */
+  figure{margin:36px 0;}
+  .netbox{background:#fff; border:1px solid var(--line); border-radius:18px; padding:18px;}
+  svg.net{width:100%; height:auto; display:block;}
+  .net .link{stroke:var(--line); stroke-width:1.6; fill:none;}
+  .net .node{fill:#fff; stroke:var(--ink-soft); stroke-width:1.6;}
+  .net .node-l{fill:var(--ink-soft); font-size:11px; font-family:var(--sans);}
+  .net .thread{stroke:var(--accent); stroke-width:2.8; fill:none; stroke-dasharray:620; stroke-dashoffset:620;}
+  .net.in .thread{animation:draw 1.6s ease forwards .2s;}
+  .net .pulse{fill:var(--accent); opacity:0;}
+  .net.in .pulse{animation:pp 1.8s ease-in-out infinite 1.6s;}
+  .net .q{fill:var(--accent-deep);}
+  @keyframes draw{to{stroke-dashoffset:0;}}
+  @keyframes pp{0%,100%{opacity:.25; r:5;}50%{opacity:.9; r:7;}}
+  figcaption{font-size:.86rem; color:var(--muted); text-align:center; margin-top:14px; line-height:1.85; font-family:var(--sans);}
+  figcaption strong{color:var(--accent);}
+
+  /* three-layer stack */
+  .stack{margin:30px 0; display:grid; gap:11px;}
+  .layer{border-radius:12px; padding:17px 21px; border:1px solid var(--line); background:var(--paper);}
+  .layer .lt{font-family:var(--serif); font-weight:600; font-size:1.04rem; color:var(--ink);}
+  .layer .ld{font-size:.92rem; color:var(--ink-soft); margin-top:3px; font-family:var(--sans);}
+  .layer.l1{background:var(--cream-2);} .layer.l2{background:#fbeee7; border-color:var(--accent-lite);} .layer.l3{background:#f6efe4;}
+  .layer .badge{float:right; font-size:.71rem; color:var(--muted); background:var(--paper);
+    border:1px solid var(--line); border-radius:999px; padding:2px 11px; margin-left:8px; font-family:var(--sans);}
+
+  /* checklist */
+  ul.clean{list-style:none; padding:0; margin:26px 0;}
+  ul.clean li{position:relative; padding:11px 0 11px 30px; border-bottom:1px solid var(--line);
+    font-family:var(--sans); color:var(--ink-soft); font-size:.98rem;}
+  .dark ul.clean li{border-color:rgba(255,255,255,.14); color:rgba(247,244,238,.82);}
+  ul.clean li:before{content:"—"; position:absolute; left:4px; color:var(--accent);}
+  .dark ul.clean li:before{color:var(--accent-lite);}
+
+  /* details */
+  details{background:var(--paper); border:1px solid var(--line); border-radius:12px; padding:2px 22px; margin:24px 0; transition:.3s;}
+  details[open]{box-shadow:0 12px 36px -26px rgba(40,30,20,.6);}
+  summary{cursor:pointer; font-family:var(--sans); font-weight:700; color:var(--ink-soft); padding:16px 0; list-style:none; font-size:.94rem;}
+  summary::-webkit-details-marker{display:none;}
+  summary:before{content:"＋ "; color:var(--accent); font-weight:700;}
+  details[open] summary:before{content:"− ";}
+  details .body{padding:4px 0 18px; font-size:.93rem; color:var(--ink-soft); line-height:1.95; font-family:var(--sans);}
+  details .body strong{color:var(--accent-deep);}
+  details .body h3{color:var(--ink); font-size:1.02rem; margin:8px 0 6px;}
+
+  /* table */
+  table{width:100%; border-collapse:collapse; margin:16px 0; font-size:.9rem; font-family:var(--sans);}
+  th,td{text-align:left; padding:9px 10px; border-bottom:1px solid var(--line); vertical-align:top;}
+  th{color:var(--ink); font-family:var(--serif); font-weight:600; background:var(--cream-2);}
+  td.h{color:var(--accent-deep); font-weight:700;}
+
+  /* closing */
+  .final{font-family:var(--serif); font-size:clamp(1.2rem,2.6vw,1.5rem); line-height:1.95; color:var(--ink);}
+  footer{background:#0e0e14; color:rgba(247,244,238,.6); text-align:center; padding:64px 6vw; font-size:.82rem; letter-spacing:.05em; line-height:2;}
+  footer .fb{font-family:var(--serif); font-size:1.3rem; color:#fbf8f2; letter-spacing:.18em; margin-bottom:10px;}
+  footer .tag{color:rgba(247,244,238,.78); font-family:var(--serif); letter-spacing:.12em; margin-bottom:20px;}
+
+  /* reveal */
+  .reveal{opacity:0; transform:translateY(30px); transition:opacity .85s cubic-bezier(.16,1,.3,1), transform .85s cubic-bezier(.16,1,.3,1);}
+  .reveal.visible{opacity:1; transform:none;}
+  .reveal.d1{transition-delay:.08s;} .reveal.d2{transition-delay:.16s;} .reveal.d3{transition-delay:.24s;}
+  @media(prefers-reduced-motion:reduce){
+    .reveal{opacity:1; transform:none; transition:none;}
+    .net .thread{stroke-dashoffset:0; animation:none;} .net .pulse{opacity:.6; animation:none;}
+    .scroll-cue span{animation:none;}
+  }
+</style>
+</head>
+<body>
+<div id="progress"></div>
+
+<!-- ============ HERO ============ -->
+<header id="hero" class="dark">
+  <div class="inner">
+    <div class="kicker reveal">AI × 対話型組織開発｜やさしい図解</div>
+    <h1 class="reveal d1">流れて消えるはずの対話が、<br><span class="em">知恵に変わる。</span></h1>
+    <p class="sub reveal d2">
+      その場で消えていた言葉を、網に蓄える。AIがそこから“効く糸”を引くとき、意味が跳ねる（創発）。
+      ——対話型組織開発の“その先”を、人とAIでつくる。その仕組みを、ひとつずつ。
+    </p>
+    <div class="scroll-cue reveal d3"><span>SCROLL ↓</span></div>
+  </div>
+</header>
+
+<!-- ============ 1. 轍をゆるめる ============ -->
+<section class="cream">
+  <div class="wrap">
+    <div class="eyebrow reveal"><span class="step-no">01</span>　出発点</div>
+    <h2 class="reveal d1">「轍（わだち）」をゆるめる、ということ</h2>
+    <p class="lead reveal d2">
+      道に車輪が通り続けると、溝（轍）ができます。組織にも同じ溝がある。
+      「うちはこういう会社だから」「これはこう決まっているから」——<strong>固まった意味づけの溝</strong>です。
+    </p>
+    <p class="reveal">
+      溝は便利です。毎回ゼロから考えなくていい。でも同時に、
+      <span class="ink-strong">別の見方・まだ語られていない可能性を抑えこんで</span>しまう。
+    </p>
+    <p class="reveal">
+      対話型組織開発とは、その溝をゆるめ、別の角度から<strong>新しい意味を立ち上げる</strong>こと。
+      そのために必要なのが、安心して本音を出せる「<span class="ink-strong">器（コンテナ）</span>」です。
+    </p>
+    <blockquote class="reveal">固まった“当たり前”をゆるめ、<br>まだ名前のついていない物語が立ち上がる。</blockquote>
+    <details class="reveal">
+      <summary>もっと詳しく：理論的な背景（HRD/OD向け）</summary>
+      <div class="body">
+        ベースは<strong>社会構成主義</strong>（現実は対話の中で社会的に構成される）と、フーコーの<strong>言説論</strong>（“轍”＝固定された言説＝ディスコース）。
+        Bushe &amp; Marshak は2009年、従来型を<strong>診断型OD</strong>（客観的事実を測れる、という前提）と名づけ、これと対比する新種として<strong>対話型OD（Dialogic OD）</strong>を提唱しました。
+        両者の違いは「診断があるか／ないか」ではなく、<strong>「客観的な事実があると捉えるか・ないと捉えるか」というパラダイムの差</strong>です。
+        代表的手法：アプリシエイティブ・インクワイアリー、ワールド・カフェ、OST、フューチャー・サーチ。
+      </div>
+    </details>
+  </div>
+</section>
+
+<!-- ============ 2. AIが位相を変える ============ -->
+<section>
+  <div class="wrap">
+    <div class="eyebrow reveal"><span class="step-no">02</span>　何が変わるのか</div>
+    <h2 class="reveal d1">AIが、対話の“位相”を変える</h2>
+    <p class="lead reveal d2">人だけで話すと、つい過去の溝に戻ってしまう。そこにAIが入ると、3つのことが起きます。</p>
+    <div class="cards three">
+      <div class="card reveal d1"><span class="n">①</span><h4>再文脈化が速くなる</h4><p>要素をAIに入れると、人の頭だけでは出てこなかった<b>別の意味</b>が立ち上がる。轍の外の見方が手に入る。</p></div>
+      <div class="card reveal d2"><span class="n">②</span><h4>ゲシュタルト転換が起きる</h4><p>新しい視点が一つできると、<b>他のものが全部そこに再編集される</b>。一点の変化が全体を組み替える。</p></div>
+      <div class="card reveal d3"><span class="n">③</span><h4>意味が蓄積・持続する</h4><p>流れて消えるはずの対話を溜め続けると、<b>やがて意味が跳ねる（創発）</b>。次章の核へ。</p></div>
+    </div>
+    <p class="muted reveal" style="margin-top:26px">
+      そしてAIは<strong>“補助線”</strong>でもあります。論点を外に出す（外在化）ことで、
+      「人 vs 人」の対立を「<span class="ink-strong">人 vs 論点</span>」に変える。だから、いつもは言いにくい声も出てきます。
+    </p>
+  </div>
+</section>
+
+<!-- ============ 3. SECI ============ -->
+<section class="cream2">
+  <div class="wrap">
+    <div class="eyebrow reveal"><span class="step-no">03</span>　知識が回る仕組み</div>
+    <h2 class="reveal d1">知識には「2種類」あり、回し方に「最大の難所」がある</h2>
+    <div class="twoup reveal d1">
+      <div class="box b-old"><div class="tag">FORMAL</div><h4>形式知</h4><p>言葉・マニュアル・ルールにできる知識。「こういう時はこうする」と書き出せる。</p></div>
+      <div class="box b-new"><div class="tag">TACIT</div><h4>暗黙知</h4><p>言葉にしづらい“カン・コツ・判断”。本人も「一言では言えない」けれど、確かにある。</p></div>
+    </div>
+    <p class="reveal">
+      知識創造は4つの動きで回ります（野中郁次郎の<span class="ink-strong">SECIモデル</span>）。
+      ざっくり言うと——<b>① 共有する → ② 言葉にする → ③ 組み合わせる → ④ 体に落とす</b>。
+    </p>
+    <blockquote class="reveal">
+      この中で一番つまずくのが <span class="hl">②「言葉にする（表出化）」</span>。<br>
+      暗黙知は、そもそも言葉にしきれないから。
+    </blockquote>
+    <details class="reveal">
+      <summary>もっと詳しく：SECIの4モードと「場（Ba）」</summary>
+      <div class="body">
+        SECI＝共同化（暗黙→暗黙）／表出化（暗黙→形式）／連結化（形式→形式）／内面化（形式→暗黙）。
+        重要なのは、<strong>SECI（知識変換のプロセス）と 場＝Ba（それが起きる文脈の器）は別概念で対をなす</strong>こと（Nonaka &amp; Konno 1998）。
+        4つの場は各モードに対応します：創出場＝共同化／対話場＝表出化／<strong>システム場(Cyber Ba)＝連結化</strong>／実践場＝内面化。
+        後半のカギは、このシステム場（デジタルの場）の役割が、AI×Obsidianで大きく拡張される点です。
+      </div>
+    </details>
+  </div>
+</section>
+
+<!-- ============ 4. 暗黙知の例 ============ -->
+<section class="cream">
+  <div class="wrap">
+    <div class="eyebrow reveal"><span class="step-no">04</span>　暗黙知って、何？</div>
+    <h2 class="reveal d1">レシピにはできない。でも「網の目」なら写せる</h2>
+    <p class="lead reveal d2">
+      形式知が<b>レシピ</b>だとすれば、暗黙知は<b>名人の“火加減”</b>。
+      数値では書けないけれど、その場その場でちゃんと働いています。
+    </p>
+    <div class="ex reveal">
+      <div class="label">たとえば — 退職する専務の「見積もり」</div>
+      <p style="margin:0 0 12px;">
+        専務に「見積もりのコツは？」と聞いても、ルールは出てきません（＝暗黙知）。
+        ところが、過去の見積書を<b>1枚ずつ見せながら語ってもらう</b>と、
+        「この案件はここを厚めに」「この客はこう」と、<strong>つどつど言葉が出てくる</strong>。
+      </p>
+      <p style="margin:0;" class="muted">
+        だから暗黙知は、<span class="ink-strong">1本のルールには圧縮できない</span>。
+        でも、<strong>「事例 × 文脈 × 判断」の網の目</strong>としてなら、写し取れるのです。
+      </p>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 5. 核心：網ごと写す → AIが糸を引く ============ -->
+<section>
+  <div class="wrap">
+    <div class="eyebrow reveal"><span class="step-no">05</span>　核心</div>
+    <h2 class="reveal d1">網ごと写して、AIが“効く糸”を引く</h2>
+    <p class="lead reveal d2">
+      Obsidianは、<b>点（メモ）と線（つながり）の網</b>。
+      事例・断片・つどつどの言葉を溜めて繋ぐ＝<strong>暗黙知を“網ごと”外に出す</strong>。
+    </p>
+    <figure class="reveal">
+      <div class="netbox">
+        <svg class="net" viewBox="0 0 600 380" role="img" aria-label="メモの網からAIが効く糸を引く図">
+          <g>
+            <path class="link" d="M120,90 L260,150"/><path class="link" d="M120,90 L90,210"/>
+            <path class="link" d="M260,150 L210,260"/><path class="link" d="M260,150 L400,120"/>
+            <path class="link" d="M400,120 L470,220"/><path class="link" d="M90,210 L210,260"/>
+            <path class="link" d="M210,260 L340,300"/><path class="link" d="M470,220 L340,300"/>
+            <path class="link" d="M400,120 L260,150"/>
+          </g>
+          <path class="thread" d="M555,330 L470,220 L400,120 L260,150 L120,90"/>
+          <g>
+            <circle class="node" cx="120" cy="90" r="9"/><circle class="node" cx="260" cy="150" r="9"/>
+            <circle class="node" cx="400" cy="120" r="9"/><circle class="node" cx="90" cy="210" r="9"/>
+            <circle class="node" cx="210" cy="260" r="9"/><circle class="node" cx="470" cy="220" r="9"/>
+            <circle class="node" cx="340" cy="300" r="9"/>
+          </g>
+          <circle class="pulse" cx="400" cy="120" r="5"/><circle class="pulse" cx="260" cy="150" r="5"/>
+          <circle class="q" cx="555" cy="330" r="10"/>
+          <text x="555" y="334" text-anchor="middle" font-size="12" fill="#fff" font-weight="700">？</text>
+          <text x="555" y="360" text-anchor="middle" class="node-l">新しい問い</text>
+          <text x="120" y="74" text-anchor="middle" class="node-l">効く答え</text>
+        </svg>
+      </div>
+      <figcaption>
+        新しい問い（？）が来ると、AIは網の中から<strong>“今の問いに効く糸”</strong>を引いてくる。<br>
+        → 本人がいなくても、<b>その人のように</b>判断・生成できる。
+      </figcaption>
+    </figure>
+    <blockquote class="pull reveal">
+      やっているのは「捕まえる（capture）」ではなく、<br>
+      「もう一度はたらかせる（<span class="hl">再演 / re-enactment</span>）」。
+    </blockquote>
+    <p class="muted reveal">
+      ※ 大事な但し書き：暗黙知が100%データになるわけではありません（語られない部分は残る）。
+      やっているのは「ルール化を諦め、“網＋AI”で暗黙知の<span class="ink-strong">はたらきを再現する</span>」ことです。
+    </p>
+  </div>
+</section>
+
+<!-- ============ 6. 補論 ============ -->
+<section class="cream2">
+  <div class="wrap">
+    <div class="eyebrow reveal"><span class="step-no">06</span>　よくある疑問</div>
+    <h2 class="reveal d1">「網そのものが暗黙知なのでは？」</h2>
+    <p class="lead reveal d2">鋭い直感です。半分あたっていて、半分は言葉を足すと、もっとクリアになります。</p>
+    <div class="stack reveal">
+      <div class="layer l1"><span class="badge">＝ 形式知</span><div class="lt">① 溜まっているもの：メモ＋つながり</div><div class="ld">Obsidianの中身は、書かれたテキスト。だから“格納されているもの”はすべて形式知です。</div></div>
+      <div class="layer l2"><span class="badge">＝ 暗黙知（再演）</span><div class="lt">② 立ち上がるもの：網を読み解く“瞬間”</div><div class="ld">暗黙知は溜まりません。人やAIが網を<b>つなげて読み解く動作のたびに</b>、その場で立ち上がります。</div></div>
+      <div class="layer l3"><span class="badge">＝ 場（Ba）</span><div class="lt">③ それを支えるもの：網全体＝文脈の器</div><div class="ld">網は“文脈”を保存し、②の再演が起きる土台になります。これが「場（Ba）」の正体です。</div></div>
+    </div>
+    <blockquote class="reveal">暗黙知は“モノ”ではなく、“出来事”。<br>溜めるのは文脈、立ち上がるのは、読むたびに。</blockquote>
+    <details class="reveal">
+      <summary>もっと詳しく：Polanyi と Tsoukas で正確に言うと</summary>
+      <div class="body">
+        Polanyi：暗黙知とは諸要素を<strong>一つの意味へ統合する“働き”</strong>であり、意味は要素の中でなく<strong>要素間の関係・文脈</strong>に宿る（「我々は語れる以上のことを知っている」）。
+        Tsoukas：暗黙知は<strong>捕捉・変換できず、実践の中で発揮されるだけ</strong>——だから「網ごと保存」したのは形式知（要素＋文脈）であって、暗黙知そのものは読み解く<strong>瞬間に再演（re-enactment）</strong>される。<br><br>
+        <strong>新規性の核：</strong>野中(1998)はシステム場（デジタルの場）を「形式知だけを扱う薄いIT空間」と想定した。
+        MDワールドは<strong>リンクで“文脈”を保存する</strong>ことで、そのデジタルの場に、本来は対面の場にしかなかった<strong>文脈の濃さ</strong>を持ち込む。
+        ＝知識創造の主体を「人・組織」から<strong>「人＋AI＋蓄積された網」</strong>へ拡張する（分散認知／拡張された心の系譜）。
+      </div>
+    </details>
+  </div>
+</section>
+
+<!-- ============ 7. なぜ効く ============ -->
+<section class="cream">
+  <div class="wrap">
+    <div class="eyebrow reveal"><span class="step-no">07</span>　相性</div>
+    <h2 class="reveal d1">なぜ AI × Obsidian は“劇的に”効くのか</h2>
+    <ul class="clean reveal d1">
+      <li><b>蓄積</b>：対話で立ち上がった意味・声・周縁化された違和感を、<span class="ink-strong">文脈ごと永続ネットワーク化</span>。流れて消えない。</li>
+      <li><b>連結</b>：横断すると論点が見えてくる → さらに調べて入れる、の循環をAIが桁違いに加速。</li>
+      <li><b>抽出</b>：蓄積された網から、AIが<span class="ink-strong">“暗黙知的な判断”を重みづけで再現</span>。</li>
+      <li><b>多元性</b>：複数のAI × Obsidian ＝「自立とは依存先を増やすこと」（熊谷晋一郎）。</li>
+    </ul>
+    <p class="muted reveal">→ だから、環境を整えてしまえば<strong>真似されにくい“必殺技”</strong>になる。</p>
+  </div>
+</section>
+
+<!-- ============ 8. 主役は人間 ============ -->
+<section>
+  <div class="wrap">
+    <div class="eyebrow reveal"><span class="step-no">08</span>　役割分担</div>
+    <h2 class="reveal d1">位相を変えても、主役は人間</h2>
+    <p class="lead reveal d2">分担の軸は「<span class="ink-strong">摩擦をどこに残すか</span>」です。</p>
+    <div class="twoup reveal d1">
+      <div class="box b-old"><div class="tag">AI が引き受ける</div><h4>認知的な摩擦</h4><p>整理・見える化・論点の分解・集計。煩雑だが頭を使う作業。</p></div>
+      <div class="box b-new"><div class="tag">人間に残す</div><h4>関係的・変容的な摩擦</h4><p>揺れ・納得・信頼・最終判断。<b>変わることの痛み</b>に向き合うところ。</p></div>
+    </div>
+    <p class="muted reveal">倫理の境界・統合・最終決定は、人間が握る。AIは轍をゆるめる“補助線”に徹する。</p>
+  </div>
+</section>
+
+<!-- ============ 9. なぜ今 ============ -->
+<section class="dark">
+  <div class="wrap">
+    <div class="eyebrow reveal"><span class="step-no">09</span>　なぜ今・なぜここで</div>
+    <h2 class="reveal d1">効率化（レッド）ではなく、創発（ブルー）へ。</h2>
+    <p class="lead reveal d2">
+      かつてZOOMが「対話の前提」を変えたように、いま<strong>AIが組織開発の前提</strong>を変えようとしています。
+    </p>
+    <p class="reveal">
+      多くの人が向かうのは、効率化のAX（みんないる＝レッド）。
+      ここで狙うのは、<strong>創発のAX（まだ誰もいない＝ブルー）</strong>。
+      海外から輸入するのではなく、<span class="ink-strong">この現場から、新しい知識創造サイクルを立ち上げられる</span>。
+    </p>
+  </div>
+</section>
+
+<!-- ============ CLOSING ============ -->
+<section class="cream center">
+  <div class="wrap">
+    <div class="eyebrow reveal" style="justify-content:center">まとめ</div>
+    <p class="final reveal d1">
+      対話型組織開発とは、轍をゆるめ、新しい意味を立ち上げること。<br>
+      AIはその位相転換を加速し、Obsidianが立ち上がった意味を網として蓄える。<br>
+      暗黙知は“溜める”のではなく、<span style="color:var(--accent)">読むたびに再演される</span>。<br>
+      ——人だけの時代より、一段高い位相で、知識が回りはじめる。
+    </p>
+    <details class="reveal" style="text-align:left; margin-top:38px;">
+      <summary>研究メモ：理論的な裏付け（深く知りたい人向け）</summary>
+      <div class="body">
+        <h3>SECI と Ba の対応</h3>
+        <table>
+          <tr><th>SECIモード</th><th>場（Ba）</th><th>AI×Obsidianの効き所</th></tr>
+          <tr><td class="h">共同化</td><td>創出場</td><td>弱（身体的同席が要）</td></tr>
+          <tr><td class="h">表出化</td><td>対話場</td><td>中（外在化・補助線）</td></tr>
+          <tr><td class="h">連結化</td><td>システム場(Cyber Ba)</td><td><b>強（主戦場）</b></td></tr>
+          <tr><td class="h">内面化</td><td>実践場</td><td>中（振り返りの蓄積）</td></tr>
+        </table>
+        <p>・<strong>「表出化を迂回」は厳密には不正確</strong>。野中の表出化はメタファー・物語・事例も含むため、断片を残す時点で“軽い表出化”は起きている。正確には「完全な表出化＝ルール化を諦め、<b>部分表出化 → AI連結化＋再演</b>に重心を移す」。</p>
+        <p>・<strong>capture でなく re-enactment</strong>（Tsoukas 2003 の「暗黙知は捕捉できない」批判を、避けるのでなく取り込む）。</p>
+        <p>・<strong>知識創造の主体の拡張</strong>：「人・組織」→「人＋AI＋蓄積された網」。分散認知（Hutchins 1995）／拡張された心（Clark &amp; Chalmers 1998）の系譜が後ろ盾になりうる。</p>
+        <p>・<strong>「位相を変える」＝言説レベルの生成的転換</strong>（個人のreframeではなく、Dialogic OD の generative image ／ Gergen の社会構成主義）。</p>
+      </div>
+    </details>
+  </div>
+</section>
+
+<footer>
+  <div class="fb">Oxymoron</div>
+  <div class="tag">まだ名前のない物語が立ち上がる、ともにある。</div>
+  <div style="font-size:.78rem; color:rgba(247,244,238,.5); line-height:1.9;">
+    出典ノート「AI×対話型組織開発の構造 — 位相転換とSECI×Obsidian」（岸本渉）<br>
+    主要文献：Nonaka &amp; Konno 1998／Polanyi 1966／Tsoukas 2003／Bushe &amp; Marshak 2009, 2015（邦訳『対話型組織開発』英治出版・中村和彦監訳）／Hutchins 1995／Clark &amp; Chalmers 1998<br>
+    ＊概念をやさしく伝えるための図解です。正確な定義は各文献および出典ノートを参照してください。
+  </div>
+</footer>
+
+<script>
+  const pr=document.getElementById('progress');
+  function onScroll(){const h=document.documentElement.scrollHeight-window.innerHeight; pr.style.width=(h>0?window.scrollY/h*100:0)+'%';}
+  window.addEventListener('scroll',onScroll,{passive:true}); onScroll();
+  const io=new IntersectionObserver((es)=>{es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('visible'); io.unobserve(e.target);}})},{threshold:.12,rootMargin:'0px 0px -7% 0px'});
+  document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
+  const nio=new IntersectionObserver((es)=>{es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');}})},{threshold:.4});
+  document.querySelectorAll('svg.net').forEach(el=>nio.observe(el));
+</script>
+</body>
+</html>
