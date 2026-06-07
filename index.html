@@ -127,6 +127,29 @@
   .layer .badge{float:right; font-size:.71rem; color:var(--muted); background:var(--paper);
     border:1px solid var(--line); border-radius:999px; padding:2px 11px; margin-left:8px; font-family:var(--sans);}
 
+  /* SECI 2x2 matrix */
+  .seci{display:grid; grid-template-columns:1fr 1fr; gap:14px; margin:34px 0 6px;}
+  @media(max-width:620px){.seci{grid-template-columns:1fr;}}
+  .qd{position:relative; border:1px solid var(--line); border-radius:13px; padding:24px 22px 20px; background:var(--paper);
+    transition:transform .5s, box-shadow .5s;}
+  .qd:hover{transform:translateY(-4px); box-shadow:0 16px 34px rgba(0,0,0,.08);}
+  .qd .ord{position:absolute; top:-13px; left:18px; width:27px; height:27px; border-radius:50%;
+    background:var(--accent); color:#fff; font-family:var(--serif); font-weight:600; font-size:.92rem;
+    display:flex; align-items:center; justify-content:center;}
+  .qd .mode{font-family:var(--serif); font-weight:600; font-size:1.14rem; color:var(--ink);}
+  .qd .mark{font-size:.68rem; letter-spacing:.1em; font-family:var(--sans); font-weight:700; margin-left:9px;
+    border-radius:999px; padding:2px 9px; vertical-align:middle;}
+  .qd .mark.hard{color:var(--muted); border:1px solid var(--line);}
+  .qd .mark.win{color:#fff; background:var(--accent);}
+  .qd .dir{font-size:.8rem; letter-spacing:.06em; color:var(--muted); font-family:var(--sans); margin:3px 0 13px;}
+  .qd .ba{font-size:.95rem; color:var(--ink-soft); font-family:var(--sans); line-height:1.8;}
+  .qd .ba b{color:var(--accent-deep);}
+  .qd .ai{margin-top:13px; font-size:.73rem; letter-spacing:.14em; font-family:var(--sans);
+    display:inline-block; border:1px solid var(--line); border-radius:999px; padding:3px 13px; color:var(--muted);}
+  .qd.hot{background:#fbeee7; border-color:var(--accent-lite); box-shadow:0 12px 30px -22px rgba(143,66,38,.7);}
+  .qd.hot .ai{background:var(--accent); color:#fff; border-color:var(--accent);}
+  .qd.cool{background:var(--cream-2);}
+
   /* checklist */
   ul.clean{list-style:none; padding:0; margin:26px 0;}
   ul.clean li{position:relative; padding:11px 0 11px 30px; border-bottom:1px solid var(--line);
@@ -223,7 +246,7 @@
     <p class="lead reveal d2">人だけで話すと、つい過去の溝に戻ってしまう。そこにAIが入ると、3つのことが起きます。</p>
     <div class="cards three">
       <div class="card reveal d1"><span class="n">①</span><h4>再文脈化が速くなる</h4><p>要素をAIに入れると、人の頭だけでは出てこなかった<b>別の意味</b>が立ち上がる。轍の外の見方が手に入る。</p></div>
-      <div class="card reveal d2"><span class="n">②</span><h4>ゲシュタルト転換が起きる</h4><p>新しい視点が一つできると、<b>他のものが全部そこに再編集される</b>。一点の変化が全体を組み替える。</p></div>
+      <div class="card reveal d2"><span class="n">②</span><h4>全体像がパチッと組み替わる</h4><p>新しい見方が一つ生まれると、<b>それに引っぱられて他のこと全部が見直される</b>。一点の変化が、場の理解を一気に組み替える（＝ゲシュタルト転換）。</p></div>
       <div class="card reveal d3"><span class="n">③</span><h4>意味が蓄積・持続する</h4><p>流れて消えるはずの対話を溜め続けると、<b>やがて意味が跳ねる（創発）</b>。次章の核へ。</p></div>
     </div>
     <p class="muted reveal" style="margin-top:26px">
@@ -250,6 +273,38 @@
       この中で一番つまずくのが <span class="hl">②「言葉にする（表出化）」</span>。<br>
       暗黙知は、そもそも言葉にしきれないから。
     </blockquote>
+    <figure class="reveal">
+      <div class="seci">
+        <div class="qd cool"><span class="ord">1</span>
+          <div class="mode">共同化</div>
+          <div class="dir">暗黙 → 暗黙</div>
+          <div class="ba">場：<b>創出場</b><br>体験・感情を分かち合い、共感が生まれる</div>
+          <div class="ai">AI 弱</div>
+        </div>
+        <div class="qd"><span class="ord">2</span>
+          <div class="mode">表出化 <span class="mark hard">最難所</span></div>
+          <div class="dir">暗黙 → 形式</div>
+          <div class="ba">場：<b>対話場</b><br>暗黙知を言葉・概念にしていく</div>
+          <div class="ai">AI 中（外在化・補助線）</div>
+        </div>
+        <div class="qd"><span class="ord">4</span>
+          <div class="mode">内面化</div>
+          <div class="dir">形式 → 暗黙</div>
+          <div class="ba">場：<b>実践場</b><br>やってみて、体に落とす</div>
+          <div class="ai">AI 中（振り返りの蓄積）</div>
+        </div>
+        <div class="qd hot"><span class="ord">3</span>
+          <div class="mode">連結化 <span class="mark win">★ 主戦場</span></div>
+          <div class="dir">形式 → 形式</div>
+          <div class="ba">場：<b>システム場</b><br>形式知を結合・編集する</div>
+          <div class="ai">AI 強</div>
+        </div>
+      </div>
+      <figcaption>
+        SECIは <strong>1 → 2 → 3 → 4</strong> と回り、一周ごとに知が<strong>らせん状に一段上がる</strong>。<br>
+        つまずきやすいのが <b>2 表出化（対話場）</b>。そして AI×Obsidian が最も効くのが <strong>3 連結化（システム場）</strong>＝“まだ誰もいない”主戦場。
+      </figcaption>
+    </figure>
     <details class="reveal">
       <summary>もっと詳しく：SECIの4モードと「場（Ba）」</summary>
       <div class="body">
