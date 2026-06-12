@@ -150,6 +150,16 @@
   .qd.hot .ai{background:var(--accent); color:#fff; border-color:var(--accent);}
   .qd.cool{background:var(--cream-2);}
 
+  /* flow steps & stage badge */
+  .flow{display:flex; flex-wrap:wrap; align-items:center; gap:8px; margin:28px 0;}
+  .flow .st{background:var(--paper); border:1px solid var(--line); border-radius:999px; padding:8px 16px; font-family:var(--sans); font-size:.9rem; color:var(--ink-soft);}
+  .flow .st b{color:var(--accent-deep);}
+  .flow .st.em{background:#fbeee7; border-color:var(--accent-lite); color:var(--accent-deep); font-weight:700;}
+  .flow .ar{color:var(--accent); font-weight:700;}
+  .stage{display:inline-block; font-size:.7rem; letter-spacing:.16em; font-family:var(--sans); font-weight:700;
+    color:#fff; background:var(--accent); border-radius:999px; padding:3px 13px; margin-bottom:14px;}
+  .stage.two{background:var(--ink-soft);}
+
   /* checklist */
   ul.clean{list-style:none; padding:0; margin:26px 0;}
   ul.clean li{position:relative; padding:11px 0 11px 30px; border-bottom:1px solid var(--line);
@@ -261,14 +271,52 @@
   </div>
 </section>
 
-<!-- ============ 3. SECI ============ -->
+<!-- ============ 3. 1段目：1回の場が豊かになる ============ -->
+<section class="cream">
+  <div class="wrap">
+    <div class="eyebrow reveal"><span class="step-no">03</span>　まず、1回の場で</div>
+    <span class="stage reveal">1段目</span>
+    <h2 class="reveal d1">安全 → 拡散 → 創発 → 収束。その一つひとつに、AIが効く</h2>
+    <p class="lead reveal d2">
+      対話の場には、ひとつの流れがあります。まず<b>安全の器</b>をつくり、声を<b>拡散</b>させ、新しい意味が<b>創発</b>し、それを<b>収束</b>させて決めていく。
+      この流れ自体はAIがなくても回りますが、その一つひとつの局面に、AIが静かに効いてきます。
+    </p>
+    <div class="flow reveal d2">
+      <span class="st"><b>安全</b>の器</span><span class="ar">→</span>
+      <span class="st"><b>拡散</b></span><span class="ar">→</span>
+      <span class="st"><b>創発</b></span><span class="ar">→</span>
+      <span class="st em"><b>収束</b>・決定</span>
+    </div>
+    <p class="reveal">
+      たとえば<strong>創発</strong>の局面。AIに<b>リサーチや別の文脈</b>を入れると、自分たちだけでは出てこなかった視点が立ち上がる。しかも、ただ広げるだけではありません。<b>「こういう制約のなかで」</b>と条件を渡すと、その枠のなかでアイデアが<strong>ブラッシュアップ</strong>されていく。広げることと、質を上げること。その両方を、同じ流れで行き来できます。
+    </p>
+    <h3 class="reveal">決める——「含んで超える」</h3>
+    <p class="reveal">
+      いちばんの難所が、<strong>収束（意思決定）</strong>です。ここで起きてほしいのは、妥協とは少し違います。
+    </p>
+    <div class="twoup reveal">
+      <div class="box b-old"><div class="tag">これではない</div><h4>妥協・調整</h4><p>多数決、声の大きい人に合わせる、足して二で割る。誰かの意見が<b>削られて</b>、我慢が残る。</p></div>
+      <div class="box b-new"><div class="tag">めざすのは</div><h4>含んで超える</h4><p>反対の声も、その奥の<b>「大切にしていること」ごと</b>拾う。意見を消さず、<b>含んだまま、もう一段上の案へ</b>編み直す。</p></div>
+    </div>
+    <p class="reveal">
+      ここでAIを<b>一人のエージェント</b>として対話に加え、「この案を、みんなの懸念も活かしてもっと良くするには」と問いかけていく。すると、<strong>反対の奥にあった価値までもが拾われ、提案に取り込まれていく</strong>。声の大きさではなく、意見の<span class="ink-strong">“中身”</span>で決定が前へ進む。
+    </p>
+    <blockquote class="reveal">意見を消すのではなく、<span class="hl">含んで、超えていく</span>。<br>決定そのものが、一段ずつ高くなっていく。</blockquote>
+    <p class="muted reveal">
+      ——ここまでが<strong>1段目</strong>。「一回の場」が、AIで豊かになる話です。<br>
+      では、この豊かな対話を<b>一回で終わらせず、何度も重ねたら</b>？　そこから、もう一段別のこと——<strong>“網目”</strong>が立ち上がります（次章＝2段目）。
+    </p>
+  </div>
+</section>
+
+<!-- ============ 4. SECI ============ -->
 <section class="cream2">
   <div class="wrap">
-    <div class="eyebrow reveal"><span class="step-no">03</span>　知識が回る仕組み</div>
+    <div class="eyebrow reveal"><span class="step-no">04</span>　知識が回る仕組み</div>
+    <span class="stage two reveal">2段目：重ねて“網目”に</span>
     <h2 class="reveal d1">知識には「2種類」あり、回し方に「最大の難所」がある</h2>
     <div class="twoup reveal d1">
       <div class="box b-old"><div class="tag">FORMAL</div><h4>形式知</h4><p>言葉・マニュアル・ルールにできる知識。「こういう時はこうする」と書き出せる。</p></div>
-<div style="margin-top:16px"><a href="https://sho2437.github.io/oxymoron-web/" style="color:#d98a66;text-decoration:none;font-size:.82rem;letter-spacing:.08em">&rarr; Oxymoron コーポレートサイトへ</a></div>
       <div class="box b-new"><div class="tag">TACIT</div><h4>暗黙知</h4><p>言葉にしづらい“カン・コツ・判断”。本人も「一言では言えない」けれど、確かにある。</p></div>
     </div>
     <p class="reveal">
@@ -328,7 +376,7 @@
 <!-- ============ 4. 暗黙知の例 ============ -->
 <section class="cream">
   <div class="wrap">
-    <div class="eyebrow reveal"><span class="step-no">04</span>　暗黙知って、何？</div>
+    <div class="eyebrow reveal"><span class="step-no">05</span>　暗黙知って、何？</div>
     <h2 class="reveal d1">レシピにはできない。でも「網の目」なら写せる</h2>
     <p class="lead reveal d2">
       形式知が<b>レシピ</b>だとすれば、暗黙知は<b>名人の“火加減”</b>。
@@ -352,7 +400,7 @@
 <!-- ============ 5. 核心：網ごと写す → AIが糸を引く ============ -->
 <section>
   <div class="wrap">
-    <div class="eyebrow reveal"><span class="step-no">05</span>　核心</div>
+    <div class="eyebrow reveal"><span class="step-no">06</span>　核心</div>
     <h2 class="reveal d1">網ごと写して、AIが“効く糸”を引く</h2>
     <p class="lead reveal d2">
       Obsidianは、<b>点（メモ）と線（つながり）の網</b>。
@@ -401,7 +449,7 @@
 <!-- ============ 6. 補論 ============ -->
 <section class="cream2">
   <div class="wrap">
-    <div class="eyebrow reveal"><span class="step-no">06</span>　よくある疑問</div>
+    <div class="eyebrow reveal"><span class="step-no">07</span>　よくある疑問</div>
     <h2 class="reveal d1">「網そのものが暗黙知なのでは？」</h2>
     <p class="lead reveal d2">鋭い直感です。半分あたっていて、半分は言葉を足すと、もっとクリアになります。</p>
     <div class="stack reveal">
@@ -410,6 +458,9 @@
       <div class="layer l3"><span class="badge">＝ 場（Ba）</span><div class="lt">③ それを支えるもの：網全体＝文脈の器</div><div class="ld">網は“文脈”を保存し、②の再演が起きる土台になります。これが「場（Ba）」の正体です。</div></div>
     </div>
     <blockquote class="reveal">暗黙知は“モノ”ではなく、“出来事”。<br>溜めるのは文脈、立ち上がるのは、読むたびに。</blockquote>
+    <p class="muted reveal">
+      じつは、§2の②「<b>全体像がパチッと組み替わる（ゲシュタルト転換）</b>」も、この<strong>再演</strong>と同じはたらきです。新しい問いを焦点に、網全体の意味が組み替わる——それが、対話の場では<b>創発</b>として、AI×網の抽出では<b>“効く糸”</b>として現れる。<span class="ink-strong">同じエンジンが、人の対話と、AI×網の両方で回っている</span>のです。
+    </p>
     <details class="reveal">
       <summary>もっと詳しく：Polanyi と Tsoukas で正確に言うと</summary>
       <div class="body">
@@ -426,7 +477,7 @@
 <!-- ============ 7. なぜ効く ============ -->
 <section class="cream">
   <div class="wrap">
-    <div class="eyebrow reveal"><span class="step-no">07</span>　相性</div>
+    <div class="eyebrow reveal"><span class="step-no">08</span>　相性</div>
     <h2 class="reveal d1">なぜ AI × Obsidian は“劇的に”効くのか</h2>
     <ul class="clean reveal d1">
       <li><b>蓄積</b>：対話で立ち上がった意味・声・周縁化された違和感を、<span class="ink-strong">文脈ごと永続ネットワーク化</span>。流れて消えない。</li>
@@ -441,7 +492,7 @@
 <!-- ============ 8. 主役は人間 ============ -->
 <section>
   <div class="wrap">
-    <div class="eyebrow reveal"><span class="step-no">08</span>　役割分担</div>
+    <div class="eyebrow reveal"><span class="step-no">09</span>　役割分担</div>
     <h2 class="reveal d1">位相を変えても、主役は人間</h2>
     <p class="lead reveal d2">分担の軸は「<span class="ink-strong">摩擦をどこに残すか</span>」です。</p>
     <div class="twoup reveal d1">
@@ -462,7 +513,7 @@
 <!-- ============ 9. なぜ今 ============ -->
 <section class="dark">
   <div class="wrap">
-    <div class="eyebrow reveal"><span class="step-no">09</span>　なぜ今・なぜここで</div>
+    <div class="eyebrow reveal"><span class="step-no">10</span>　なぜ今・なぜここで</div>
     <h2 class="reveal d1">効率化（レッド）ではなく、創発（ブルー）へ。</h2>
     <p class="lead reveal d2">
       かつてZOOMが「対話の前提」を変えたように、いま<strong>AIが組織開発の前提</strong>を変えようとしています。
@@ -508,6 +559,7 @@
 <footer>
   <div class="fb">Oxymoron</div>
   <div class="tag">まだ名前のない物語が立ち上がる、ともにある。</div>
+  <div style="margin-bottom:20px"><a href="https://sho2437.github.io/oxymoron-web/" style="color:var(--accent-lite);text-decoration:none;font-size:.86rem;letter-spacing:.1em">&rarr; Oxymoron コーポレートサイトへ</a></div>
   <div style="font-size:.78rem; color:rgba(247,244,238,.5); line-height:1.9;">
     出典ノート「AI×対話型組織開発の構造 — 位相転換とSECI×Obsidian」（岸本渉）<br>
     主要文献：Nonaka &amp; Konno 1998／Polanyi 1966／Tsoukas 2003／Bushe &amp; Marshak 2009, 2015（邦訳『対話型組織開発』英治出版・中村和彦監訳）／Hutchins 1995／Clark &amp; Chalmers 1998<br>
